@@ -7,13 +7,28 @@ Those are the Snakemake pipelines for `pipeline-resting-preproc` and
 Quality checks get done here by undergraduates.
 
 Then run `pipeline-resting-preproc/bin/make_symlinks` and 
-`pipeline-task2rest/bin/ma  ke_symlinks` (?  check that those do their own
+`pipeline-task2rest/bin/make_symlinks` (?  check that those do their own
 type of data).
+
+To create test data, use `rsync` to copy data from the `data.hold` directory
+into the `data` directory.  Need to rsync the `preprocessed/sub-*`.  That takes
+the place of running the preprocessing steps above.  Once this is done, then
+running test subjects proceeds to `single_subject_make_project.sh`, which is
+a hacked version with the subject ID hard coded inside it.
+
+## single_subject_make_project.sh
+
+This script creates the individual conn projects under `data/nophysio/conn/sub-*`
 
 "conn batch conn script"  `conn_make_project.sh` (?)
 
 Then `make_project.py` to put data into researcher `proejct` directory.
 
+## batch_make_project.sh
+
+
+
+## conn_make_project.sh
 
 
 ## make_project.py
