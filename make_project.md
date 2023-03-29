@@ -37,9 +37,9 @@ Then `make_project.py` to put data into researcher `proejct` directory.
     --drop-key Network    # Column heading from `atlas_cluster_info.csv`
     --drop-val None    # Value from the drop-key column to not include
     --repetitionTime .8    # TR for the acquisition type, i.e., .8 for mb, 2 for sp
-    ```
-    
-    For the defaults, look in the `make_project.py` file where it parses the
-    arguments for the set defaults.
+```
+
+For the defaults, look in the `make_project.py` file where it parses the arguments for
+the set defaults.
     
     
