@@ -41,5 +41,25 @@ Then `make_project.py` to put data into researcher `proejct` directory.
 
 For the defaults, look in the `make_project.py` file where it parses the arguments for
 the set defaults.
-    
-    
+
+
+`drop-key Network` and `drop-val None` are needed if the Gordon atlas is needed.
+
+We think that `-acq` is only needed if using `-m specify-best`.  Double-check.
+
+The test run will then be the following.
+
+```
+./bin/make_project.py -s 1 --n-acqs 1 \
+    -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-test \
+    -c data/nophysio/conn \
+    -d data/nophysio/preprocessed \
+    -m specify-all -a Schaefer2018 Tian_2020_subcortical \
+    --acq rest.mb \
+    --repetitionTime .8
+```
+
+After that runs succesfully, we should restore the `data.hold` directory to `data`
+(save the test data), and rerun both of the above `./bin/make_project.py` commands
+in their entirety.
+
