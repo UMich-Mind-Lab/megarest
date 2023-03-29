@@ -47,6 +47,18 @@ the set defaults.
 
 We think that `-acq` is only needed if using `-m specify-best`.  Double-check.
 
+```
+./bin/make_project.py -s 1 --n-acqs 2 \
+    -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-test \
+    -c data/nophysio/conn \
+    -d data/nophysio/preprocessed \
+    -m best -a Gordon_2016 Tian_2020_subcortical \
+    --drop-key Network \
+    --drop-val None \
+    --repetitionTime .8
+```
+
+
 The test run will then be the following.
 
 ```
@@ -54,8 +66,8 @@ The test run will then be the following.
     -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-test \
     -c data/nophysio/conn \
     -d data/nophysio/preprocessed \
-    -m specify-all -a Schaefer2018 Tian_2020_subcortical \
-    --acq rest.mb \
+    -m specify-all --acq rest.mb \
+    -a Schaefer2018 Tian_2020_subcortical \
     --repetitionTime .8
 ```
 
