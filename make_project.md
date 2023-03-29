@@ -1,3 +1,21 @@
+# Workflow
+
+According to the video, the preprocessing scripts must be run first.
+Those are the Snakemake pipelines for `pipeline-resting-preproc` and
+`pipeline-task2rest`.
+
+Quality checks get done here by undergraduates.
+
+Then run `pipeline-resting-preproc/bin/make_symlinks` and 
+`pipeline-task2rest/bin/ma  ke_symlinks` (?  check that those do their own
+type of data).
+
+"conn batch conn script"  `conn_make_project.sh` (?)
+
+Then `make_project.py` to put data into researcher `proejct` directory.
+
+
+
 ## make_project.py
 
 `make_project.py` is run after the `make_symlinks.sh` and `conn_make_project.sh` scripts.
