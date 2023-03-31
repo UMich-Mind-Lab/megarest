@@ -1,28 +1,90 @@
 # Workflow
 
+In what follows,
+`/nfs/turbo/lsa-lukehyde/MTwiNS/mri/pipelines` will
+be called `$pipes` and `$pipes/pipeline-resting-L1` will
+be called `$L1`.
+
+We moved the `$L1/data` folder to `$L1/data.hold` so we can run tests
+using the exact paths that were used before.
+
+For testing, we are only using the `nophsyio` data.  The test subjects
+chosen were: 6106t2 (mb), 6418t2 (sp), sub-683t2 (mb), sub-737t1 (mb),
+sub-871t2 (sp).
+
 According to the video, the preprocessing scripts must be run first.
 Those are the Snakemake pipelines for `pipeline-resting-preproc` and
 `pipeline-task2rest`.
 
-Quality checks get done here by undergraduates.
+Quality checks get done here by undergraduates.  As of Mar 31, 2022, we don't
+know what those are.
 
-Then run `pipeline-resting-preproc/bin/make_symlinks` and 
-`pipeline-task2rest/bin/make_symlinks` (?  check that those do their own
-type of data).
+Then run `$pipes/pipeline-resting-preproc/bin/make_symlinks` and 
+`$pipes/pipeline-task2rest/bin/make_symlinks` (check that those do their own
+type of data).  Those will create the folders under
+`$L1/data/nophysio/preprocessed` for each subject, e.g.,
+
+```
+ls data/nophysio/preprocessed/
+sub-6106t2/  sub-6418t2/  sub-683t2/  sub-737t1/  sub-871t2/
+```
 
 To create test data, use `rsync` to copy data from the `data.hold` directory
-into the `data` directory.  Need to rsync the `preprocessed/sub-*`.  That takes
-the place of running the preprocessing steps above.  Once this is done, then
-running test subjects proceeds to `single_subject_make_project.sh`, which is
-a hacked version with the subject ID hard coded inside it.
+into the `data` directory using `rsync` from the
+`$L1/data.hold/nophysio/preprocessed/sub-*` folders, which takes the place
+of running the preprocessing steps listed above.
+
+```
+$ for sub in 6106t2 6418t2 683t2 737t1 871t2 ; do
+    rsync -av data.hold/nophysio/preprocessed/sub-$sub
+    data/nophysio/preprocessed
+done
+```
+
+## batch_make_project.sh
+
+This script takes arguments `-s [sessionID]`, `-d [data directory]`, `-c
+[conn directory]`, `--cluster` (if running on GL).  For example,
+
+```
+$ $L1/bin/batch_make_project.sh -s 1 -d data/nophysio/preprocessed \
+    -c data/nophysio/conn
+```
+
+That indiscrimately assumes that all directories in
+`data/nophysio/preprocessed/sub-*/ses-${ses}` contain valid data.
+The script then looks for a bold nifti file and sets the TR to
+0.8 if the bold file contains `mb` and to `2` if it contains `sp`
+(multiband vs spiral).  It then branches depending on whether it
+runs on the cluster.  For non-cluster jobs, it runs
+`$L1/bin/conn_make_project.sh -i ${sub} -s ${ses} -d ${data_dir} -c
+${conn_dir} --tr ${tr}`, where the variables that are not the subject ID
+are those passed to  `batch_make_project.sh`.
+
+Once that is done, then make the combination directories by running
+`$L1/bin/single_subject_make_project.sh`, which is a hacked version of
+`$L1/bin/batch_make_project.sh` with the subject ID hard coded inside it.
+Change the subject in the script for each subject run.  Results for
+each subject are in `$L1/make_project_[ID].log`.
 
 ## single_subject_make_project.sh
 
-This script creates the individual conn projects under `data/nophysio/conn/sub-*`
+This script creates the individual conn projects under
+`$L1/data/nophysio/conn/sub-*` as `batch_make_project.sh` would
+using the same commands as are in `$L1/bin/conn_make_project.sh`
+except that instead of running the pre-compiled `conn` command
+from the Singularity container, it runs `matlab`, adds the paths
+to SPM12 and CONN, then runs `conn_make_project()` as
+
+```
+conn_make_project('sub','${sub}', 'ses','${ses}',
+    'conn_dir','${conn_dir}', 'data_dir','${data_dir}',
+    'repetition_time','${tr}')
+```
 
 "conn batch conn script"  `conn_make_project.sh` (?)
 
-Then `make_project.py` to put data into researcher `proejct` directory.
+Then `make_project.py` to put data into researcher `project` directory.
 
 ## batch_make_project.sh
 
