@@ -155,7 +155,7 @@ Double-check.
     -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-test \
     -c data/nophysio/conn \
     -d data/nophysio/preprocessed \
-    -m best -a Gordon_2016 Tian_2020_subcortical \
+    -m best -a Gordon_2016 Tian_2020_Subcortical \
     --drop-key Network \
     --drop-val None \
     --repetitionTime .8
