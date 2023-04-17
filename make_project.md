@@ -179,3 +179,16 @@ directory to `data` (save the test data), and rerun both of the above
 `./bin/make_project.py` commands
 in their entirety.
 
+To try 17 Apr 2023
+
+In `makeProject.py` try to make `--drop-key` and `--drop-val` into a list of
+dict pairs to see if that will enable multiple drop keys and drop vals as 
+corresponding pairs.  Processing is at approx line 337
+
+```
+        # drop networks from connectome, if applicable
+337         if 'dDrop' in locals():
+338             print(f'\tDropping following key-pairs from connectome: {" ,".join([ k+":"+v for k,v in dDrop.items()])}')
+339             dfSplit = dfOut.copy() # so that this can happen for connectome 2
+340             connectome, dfOut = drop_from_connectome(connectome,dfOut,dDrop)
+```
