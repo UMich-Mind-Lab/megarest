@@ -192,3 +192,8 @@ corresponding pairs.  Processing is at approx line 337
 339             dfSplit = dfOut.copy() # so that this can happen for connectome 2
 340             connectome, dfOut = drop_from_connectome(connectome,dfOut,dDrop)
 ```
+
+Next from here would be to run on the full subject list.  That would be the data
+from the `data.hold` directory.
+
+Than after that, we would add Gordon(?) back and rerun
