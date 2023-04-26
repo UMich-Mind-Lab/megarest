@@ -179,6 +179,30 @@ directory to `data` (save the test data), and rerun both of the above
 `./bin/make_project.py` commands
 in their entirety.
 
+When 
+
+```
+$ ./bin/make_project.py -s 1 --n-acqs 1     -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-Schaeffer+Tian     -c data/nophysio/conn     -d data/nophysio/preprocessed     -m specify-all --acq rest.mb     -a Tian_2020_Subcortical Schaefer2018     --tthresh 200     --repetitio
+nTime .8
+```
+
+finishes, we want to run
+
+```
+./bin/make_project.py -s 1 --n-acqs 2 \
+    -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-Gordon-Tian/mb \
+    -c data/nophysio/conn \
+    -d data/nophysio/preprocessed \
+    --acq rest.mb faces.mb gng.mb reward.mb \
+    -m best -a Gordon_2016 Tian_2020_Subcortical \
+    --drop-key Network \
+    --drop-val None \
+    --repetitionTime .8
+```
+
+also need to run the above but changing `.mb` to `.sp` and change output folder to subdir `sp`.
+
+
 To try 17 Apr 2023
 
 In `makeProject.py` try to make `--drop-key` and `--drop-val` into a list of
