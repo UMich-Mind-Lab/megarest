@@ -182,8 +182,14 @@ in their entirety.
 When 
 
 ```
-$ ./bin/make_project.py -s 1 --n-acqs 1     -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-Schaeffer+Tian     -c data/nophysio/conn     -d data/nophysio/preprocessed     -m specify-all --acq rest.mb     -a Tian_2020_Subcortical Schaefer2018     --tthresh 200     --repetitio
-nTime .8
+$ ./bin/make_project.py -s 1 --n-acqs 1 \
+    -p /nfs/turbo/lsa-lukehyde/projects/bennet-megarest-Schaeffer+Tian \
+    -c data/nophysio/conn \
+    -d data/nophysio/preprocessed \
+    -m specify-all --acq rest.mb \
+    -a Tian_2020_Subcortical Schaefer2018 \
+    --tthresh 200 \
+    --repetitionTime .8
 ```
 
 finishes, we want to run
