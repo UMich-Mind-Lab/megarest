@@ -231,8 +231,11 @@ Than after that, we would add Gordon(?) back and rerun
 
 ## 1 May
 
-1.  `tar -czvf megarest-pre-May_1-2023.tar.gz \
-        /nfs/turbo/lsa-lukehyde/MTwiNS/mri/pipelines/pipeline-resting-L1/data/nophysio/conn`
+1.  ```
+    cd /nfs/turbo/lsa-lukehyde/MTwiNS/mri/pipelines/pipeline-resting-L1; 
+    tar czvf megarest-nophysio-conn_pre-may-2023.tar.gz conn \
+        /nfs/turbo/lsa-lukehyde/MTwiNS/mri/pipelines/pipeline-resting-L1/data/nophysio/conn
+    ```
     This could be archived to DataDen.
 
 2.  We need to restart with
